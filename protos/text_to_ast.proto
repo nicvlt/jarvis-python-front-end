@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package jarvis;
+
+message ChatMessage {
+  string role = 1;
+  string content = 2;
+}
+
+message TextToAstConversation {
+  repeated ChatMessage messages = 1;
+}
+
+service TextToAst {
+  rpc ProcessText(TextToAstConversation) returns (TextToAstConversation);
+}
