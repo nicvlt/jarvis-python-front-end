@@ -28,6 +28,11 @@ st.markdown(
     "To get started, describe your financial strategy in the chat box below. Jarvis will provide you with a JSON representation of your strategy."
 )
 
+# Recommendation/Examples: "If the RSI is greater than 70, sell all stocks", "If the SMA 10 is greater than the SMA 20, place an order of 10"
+st.markdown("Here are some examples of financial strategies:")
+st.markdown("1. If the RSI is greater than 70, sell all stocks")
+st.markdown("2. If the SMA 10 is greater than the SMA 20, place an order of 10")
+
 # Messages are stored in the session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -38,11 +43,6 @@ for message in st.session_state.messages:
             st.markdown(message["content"])
         else:
             st.json(message["content"])
-
-# Recommendation/Examples: "If the RSI is greater than 70, sell all stocks", "If the SMA 10 is greater than the SMA 20, place an order of 10"
-st.markdown("Here are some examples of financial strategies:")
-st.markdown("1. If the RSI is greater than 70, sell all stocks")
-st.markdown("2. If the SMA 10 is greater than the SMA 20, place an order of 10")
 
 # This is the main chat input
 if prompt := st.chat_input(placeholder="Describe your financial strategy"):
