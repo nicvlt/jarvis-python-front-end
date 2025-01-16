@@ -4,11 +4,20 @@ import text_to_ast_pb2_grpc
 
 import streamlit as st
 
+# Establish a connection to the Jarvis gRPC server
 channel = grpc.insecure_channel("localhost:3005")
 stub = text_to_ast_pb2_grpc.TextToAstStub(channel)
 
 
-def send_message(session_messages):
+def send_message(session_messages: list) -> str:
+    """Send a message to the Jarvis server and return the response.
+
+    Args:
+        session_messages (List[Dict[str, str]]): The messages in the current session.
+
+    Returns:
+        str: The response from the Jarvis server.
+    """
     response = stub.ProcessText(
         text_to_ast_pb2.TextToAstConversation(
             messages=[
@@ -28,7 +37,7 @@ st.markdown(
     "To get started, describe your financial strategy in the chat box below. Jarvis will provide you with a JSON representation of your strategy."
 )
 
-# Recommendation/Examples: "If the RSI is greater than 70, sell all stocks", "If the SMA 10 is greater than the SMA 20, place an order of 10"
+# Recommendation/Examples
 st.markdown("Here are some examples of financial strategies:")
 st.markdown("1. If the RSI is greater than 70, sell all stocks")
 st.markdown("2. If the SMA 10 is greater than the SMA 20, place an order of 10")
